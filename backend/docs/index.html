@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server docs</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Roboto", sans-serif;
+        background-color: whitesmoke;
+      }
+      section {
+        margin: auto;
+        max-width: 70%;
+      }
+      ul {
+        padding-left: 0;
+      }
+      ul > li {
+        list-style: none;
+        padding-bottom: 1rem;
+        border-top: solid 1px gray;
+      }
+
+      p {
+        padding-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>Endpoints</h1>
+      <ul>
+        <li>
+          <h2>
+            <a href="http://localhost:3000/api/status"
+              >http://localhost:3000/api/status</a
+            >
+            <h3>GET</h3>
+            <p>Responds with server status</p>
+          </h2>
+        </li>
+        <li>
+          <h2>
+            <a href="http://localhost:3000/api/login"
+              >http://localhost:3000/api/login</a
+            >
+            <h3>POST</h3>
+            <p>
+              When correct token is provided within request body it returns user
+              data
+            </p>
+          </h2>
+        </li>
+        <li>
+          <h2>
+            <a href="http://localhost:3000/api/images"
+              >http://localhost:3000/api/images</a
+            >
+          </h2>
+          <h3>GET</h3>
+          <p>Returns all images from db</p>
+          <h3>POST</h3>
+          <p>
+            Adds new image to db. Requiers authorization - correct token must be
+            provided in request body.
+          </p>
+          <h3>DELETE</h3>
+          <p>
+            Removes all images from db. Requiers authorization - correct token
+            must be provided in request body.
+          </p>
+        </li>
+        <li>
+          <h2>
+            <a href="http://localhost:3000/api/images/1"
+              >http://localhost:3000/api/images/:id</a
+            >
+          </h2>
+          <h3>GET</h3>
+          <p>Returns image of specific id</p>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

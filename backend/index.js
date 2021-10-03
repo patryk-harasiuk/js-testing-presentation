@@ -45,20 +45,24 @@ authMiddleware = async (req, res, next) => {
 
 app.post("/api/login", async (req, res) => {
   const { token } = req.body;
-  let user;
 
-  if (token) {
-    user = await db.users.asyncFindOne({ token });
-  }
+  if (!token) res.status(401).json({ error: `Unauthorized` });
 
-  if (user) {
-    res.json(user);
-  } else {
-    res.status(401).json({ message: "Unauthorized" });
-  }
+  const user = await db.users.asyncFindOne({ token });
+
+  if (!user) res.status(401).json({ error: `Unauthorized` });
+
+  res.json(user);
 });
 
-// create post
+// read images
+app.get("/api/images", async (req, res) => {
+  const images = await db.images.asyncFind({}, [["sort", { createdAt: -1 }]]);
+  console.log(images);
+  res.json(images);
+});
+
+// add image
 app.post("/api/images", authMiddleware, async (req, res) => {
   if (req.body.url === "") res.status(400).json({ error: "Bad request." });
   // TODO: add regex to verify if url is correct, if not send another error
@@ -70,11 +74,10 @@ app.post("/api/images", authMiddleware, async (req, res) => {
   res.json(image);
 });
 
-// read images
-app.get("/api/images", async (req, res) => {
-  const images = await db.images.asyncFind({}, [["sort", { createdAt: -1 }]]);
-  console.log(images);
-  res.json(images);
+// delete all
+app.delete("/api/images", authMiddleware, async (req, res) => {
+  const clean = await db.images.asyncRemove({});
+  res.json(clean);
 });
 
 app.get("/api/images/:id", async (req, res) => {
@@ -82,22 +85,16 @@ app.get("/api/images/:id", async (req, res) => {
   res.json(image);
 });
 
-// delete all
-app.delete("/api/images", authMiddleware, async (req, res) => {
-  const clean = await db.images.asyncRemove({});
-  res.json(clean);
-});
-
 // utils
 app.get("/api/status", (req, res) => {
   res.json({ status: "Server works!" });
 });
 
-app.use("/", express.static(path.resolve(__dirname, "../frontend/public")));
+app.use("/", express.static(path.resolve(__dirname, "./docs/")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/public/index.html"));
+  res.sendFile(path.resolve(__dirname, "../docs/index.html"));
 });
 
 app.listen(PORT);
-console.log("localhost:3000");
+console.log("http://localhost:3000");
