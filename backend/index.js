@@ -19,6 +19,7 @@ db.users = new AsyncNedb({
 });
 
 if (process.env.ENV === "dev") {
+  console.log("cors is on");
   const cors = require("cors");
   app.use(cors());
 }
@@ -31,28 +32,30 @@ app.use(express.urlencoded({ extended: true }));
 // const atob = (encoded) => Buffer.from(encoded, "base64").toString();
 
 authMiddleware = async (req, res, next) => {
-  const authorization = req.headers.authorization || "";
-  const token = authorization.replace("Basic ", "");
-
-  if (!token) res.status(401).json({ error: `Unauthorized` });
-
-  const user = await db.users.asyncFindOne({ token });
-
-  if (!user) res.status(401).json({ error: `Unauthorized` });
+  const token = req.headers.authorization || "";
+  let user;
+  console.log(token);
+  if (token) {
+    user = await db.users.asyncFindOne({ token });
+  }
+  if (!user) return res.status(401).json({ error: `Unauthorized` });
 
   next();
 };
 
 app.post("/api/login", async (req, res) => {
   const { token } = req.body;
+  let user;
 
-  if (!token) res.status(401).json({ error: `Unauthorized` });
+  if (token) {
+    user = await db.users.asyncFindOne({ token });
+  }
 
-  const user = await db.users.asyncFindOne({ token });
-
-  if (!user) res.status(401).json({ error: `Unauthorized` });
-
-  res.json(user);
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(401).json({ message: "Unauthorized" });
+  }
 });
 
 // read images
@@ -74,15 +77,16 @@ app.post("/api/images", authMiddleware, async (req, res) => {
   res.json(image);
 });
 
-// delete all
-app.delete("/api/images", authMiddleware, async (req, res) => {
-  const clean = await db.images.asyncRemove({});
-  res.json(clean);
-});
-
 app.get("/api/images/:id", async (req, res) => {
   const image = await db.images.asyncFindOne({ _id: req.params.id });
   res.json(image);
+});
+
+// delete image
+app.delete("/api/images/:id", authMiddleware, async (req, res) => {
+  console.log(req.params.id);
+  const removed = await db.images.asyncRemove({ _id: req.params.id });
+  res.json(removed);
 });
 
 // utils
