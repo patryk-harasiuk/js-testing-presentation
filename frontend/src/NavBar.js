@@ -28,7 +28,7 @@ function NavBar(props) {
           JS testing site
         </Typography>
         {!props.userName ? (
-          <Button color="inherit" onClick={handleLoginButton}>
+          <Button disableRipple color="inherit" onClick={handleLoginButton}>
             Login
           </Button>
         ) : (

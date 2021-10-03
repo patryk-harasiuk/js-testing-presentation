@@ -4,7 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function LoginDialog(props) {
@@ -38,7 +37,7 @@ export default function LoginDialog(props) {
       },
       body: JSON.stringify({
         token: btoa(`${userName}:${password}`),
-      }), // body data type must match "Content-Type" header
+      }),
     })
       .then((res) => {
         if (!res.ok) {
@@ -46,19 +45,15 @@ export default function LoginDialog(props) {
         }
         return res.json();
       })
-      .then((res) => props.handleLogin(res.username))
+      .then((res) => props.handleLogin(res.username, res.token))
       .catch((error) => console.warn(error));
     props.handleLoginDialogState(false);
   };
 
   return (
     <div>
-      <Dialog
-        open={props.isOpen}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Login</DialogTitle>
+      <Dialog open={props.isOpen} onClose={handleClose}>
+        <DialogTitle id="login-dialog">Login</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
