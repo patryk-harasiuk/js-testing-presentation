@@ -32,13 +32,13 @@ app.use(express.urlencoded({ extended: true }));
 // const atob = (encoded) => Buffer.from(encoded, "base64").toString();
 
 authMiddleware = async (req, res, next) => {
-  const authorization = req.headers.authorization || "";
-  const token = authorization.replace("Basic ", "");
+  const token = req.headers.authorization || "";
   let user;
+  console.log(token);
   if (token) {
     user = await db.users.asyncFindOne({ token });
   }
-  if (!user) res.status(401).json({ error: `Unauthorized` });
+  if (!user) return res.status(401).json({ error: `Unauthorized` });
 
   next();
 };
@@ -77,15 +77,16 @@ app.post("/api/images", authMiddleware, async (req, res) => {
   res.json(image);
 });
 
-// delete all
-app.delete("/api/images", authMiddleware, async (req, res) => {
-  const clean = await db.images.asyncRemove({});
-  res.json(clean);
-});
-
 app.get("/api/images/:id", async (req, res) => {
   const image = await db.images.asyncFindOne({ _id: req.params.id });
   res.json(image);
+});
+
+// delete image
+app.delete("/api/images/:id", authMiddleware, async (req, res) => {
+  console.log(req.params.id);
+  const removed = await db.images.asyncRemove({ _id: req.params.id });
+  res.json(removed);
 });
 
 // utils
