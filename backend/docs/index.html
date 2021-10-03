@@ -7,13 +7,14 @@
     <title>Server docs</title>
 
     <link
-      href="https://fonts.googleapis.com/css?family=Roboto"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap"
       rel="stylesheet"
     />
     <style>
       * {
         font-family: "Roboto", sans-serif;
         background-color: whitesmoke;
+        font-weight: 300;
       }
       section {
         margin: auto;
@@ -30,6 +31,15 @@
 
       p {
         padding-bottom: 0.5rem;
+      }
+
+      th {
+        font-weight: 500;
+      }
+
+      th,
+      td {
+        padding: 0.5em;
       }
     </style>
   </head>
@@ -87,6 +97,21 @@
           <p>Returns image of specific id</p>
         </li>
       </ul>
+      <h2>Created users:</h2>
+      <table>
+        <tr>
+          <th>Username</th>
+          <th>Password</th>
+        </tr>
+        <tr>
+          <td>admin</td>
+          <td>admin</td>
+        </tr>
+        <tr>
+          <td>user</td>
+          <td>user</td>
+        </tr>
+      </table>
     </section>
   </body>
 </html>

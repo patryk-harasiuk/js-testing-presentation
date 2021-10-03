@@ -19,6 +19,7 @@ db.users = new AsyncNedb({
 });
 
 if (process.env.ENV === "dev") {
+  console.log("cors is on");
   const cors = require("cors");
   app.use(cors());
 }
@@ -33,11 +34,10 @@ app.use(express.urlencoded({ extended: true }));
 authMiddleware = async (req, res, next) => {
   const authorization = req.headers.authorization || "";
   const token = authorization.replace("Basic ", "");
-
-  if (!token) res.status(401).json({ error: `Unauthorized` });
-
-  const user = await db.users.asyncFindOne({ token });
-
+  let user;
+  if (token) {
+    user = await db.users.asyncFindOne({ token });
+  }
   if (!user) res.status(401).json({ error: `Unauthorized` });
 
   next();
@@ -45,14 +45,17 @@ authMiddleware = async (req, res, next) => {
 
 app.post("/api/login", async (req, res) => {
   const { token } = req.body;
+  let user;
 
-  if (!token) res.status(401).json({ error: `Unauthorized` });
+  if (token) {
+    user = await db.users.asyncFindOne({ token });
+  }
 
-  const user = await db.users.asyncFindOne({ token });
-
-  if (!user) res.status(401).json({ error: `Unauthorized` });
-
-  res.json(user);
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(401).json({ message: "Unauthorized" });
+  }
 });
 
 // read images
