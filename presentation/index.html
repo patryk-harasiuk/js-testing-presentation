@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/night.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section><h1>Javascript testy</h1></section>
+        <section>
+          <section>
+            <h3>Rodzaje testów</h3>
+            <img class="r-stretch" src="./assets/typesoftests.jpg" alt="" />
+          </section>
+          <section class="comment">
+            There are a few different types of tests, and it is essential to
+            know how they differ from each other. Most applications will require
+            you to write multiple kinds of tests to get the best result
+            possible.
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Testy jednostkowe</h3>
+            <p>
+              Celem testu jednostkowego jest walidacja wydzielonej części kodu.
+              Unit testy mają wąski zakres dzięki czemu pozwalają przetestować
+              wszystkie możliwe przypadki danego fragmentu kodu.
+            </p>
+          </section>
+          <section class="comment">
+            They are small and highly focused tests that can efficiently be
+            executed on your local machine because of their fast execution time.
+            You are going to have hundreds, if not thousands of these tests and
+            run them on a regular basis while developing. The only downside to
+            these kinds of tests is that they are not executed on real devices
+            and therefore have lower fidelity than the other types of tests.
+            possible.
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Testy integracyjne</h3>
+            <p>
+              Testy integracyjne sprawdzają czy oddzielne części aplikacji
+              współpracują ze sobą zgodnie z założeniami, tak samo jak będzie to
+              miało miejsce w środowisku produkcyjnym.
+            </p>
+          </section>
+          <section class="comment">
+            These tests are of medium size and have a much higher execution time
+            then Unit tests. They aren't executed as often but are still vital
+            for checking the health status of your applications. Their fidelity
+            is also a lot higher because they run on real devices and verify the
+            actual interaction between various components of your application.
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Testy funkcjonalne / E2E</h3>
+            <p>
+              Testy end-to-end realizują skomplikowane scenariusze uzycia
+              aplikacji, zwykle wymagają dostępu do wszystkich zasobów aplikacji
+              produkcyjnej - takich jak baza danych czy serwer.
+            </p>
+          </section>
+          <section class="comment">
+            Imagine you have an application with a sign-up flow comprising of
+            several steps, and you want to test the entire flow, that’s where
+            End-to-End tests come into play. E2E tests will also run on real
+            devices just like integration tests and therefore, will again be
+            quite slow in their execution. The only downside to these kinds of
+            tests is that debugging them and finding out what went wrong if a
+            particular test fails becomes very hard because of their vast scope.
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Koncepty</h3>
+            <ul>
+              <li>Matchers</li>
+              <li>Mock</li>
+              <li>Lifecycle</li>
+            </ul>
+          </section>
+          <section class="comment">
+            Before starting to write tests for your code, you first need to be
+            familiar with the most crucial testing concepts and when you need to
+            use them. These concepts will influence the architecture of your
+            application and how you write code in general but more on that in a
+            later section.
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Matchers</h3>
+            <p>
+              Matchery pozwalają sprawdzić czy wyniki testów są zgodne z
+              założeniami
+            </p>
+            <pre><code data-trim data-noescape>
+				test('factorial of 2', () => { 
+					expect(factorial(2)).toBe(2);
+				});
+            </code></pre>
+          </section>
+          <section class="comment">
+            Imagine you have a function that calculates the result of a certain
+            factorial number. Testing the function can then be done using the
+            expect() function and a simple matcher that checks if the result of
+            the function matches the expected value.
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Mocking</h3>
+            <p>
+              Testowany fragment kodu moze być zalezny od innych elementów. Aby
+              przetestować daną funkcjonalność w izolacji, możemy zastąpić inne
+              elementy od których jest zalezny ich atrapami.
+            </p>
+          </section>
+          <section class="comment">
+            Mocks help your tests to avoid test unreliability (flakiness) and
+            improve the speed of your tests. They are also useful if the real
+            objects are impractical to incorporate into tests. In short, mocking
+            is creating objects or services that simulate the behavior of real
+            objects (A database, for example).
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Lifecycle</h3>
+            <p>
+              Podczas testowania często wykonywane jest wiele testów i kazdy z
+              nich wymaga wykonania pewnych akcji przed uruchomieniem testu.
+              Większość framweworków zapewnia funkcje pomocnicze dla ulatwienia
+              tego procesu.
+            </p>
+            <pre><code data-trim data-noescape>
+				beforeEach(() => {
+					// Initialize objects
+				});
+				  
+				afterEach(() => {
+					// Tear down objects
+				});  
+            </code></pre>
+          </section>
+          <section class="comment">
+            Here is an example of lifecycle methods in the Jest testing
+            framework.
+          </section>
+        </section>
+        <section>
+          <h3>87% deweloperów ma testy w swoich projektach</h3>
+        </section>
+        <section>
+          <section>
+            <h5>Jakie testy są używane w twoim projekcie?</h5>
+            <img class="r-stretch" src="./assets/percentoftests.png" alt="" />
+          </section>
+          <section>
+            <a href="https://www.jetbrains.com/lp/devecosystem-2020/testing/">
+              https://www.jetbrains.com/lp/devecosystem-2020/testing/
+            </a>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h5>Użycie narzędzi do testowania</h5>
+            <img
+              class="r-stretch"
+              src="./assets/testingframerworks.png"
+              alt=""
+            />
+          </section>
+          <section>
+            <a href="https://2020.stateofjs.com/en-US/technologies/testing/">
+              https://2020.stateofjs.com/en-US/technologies/testing/
+            </a>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
