@@ -4,11 +4,13 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function LoginDialog(props) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleClose = () => {
     props.handleLoginDialogState(false);
@@ -29,6 +31,7 @@ export default function LoginDialog(props) {
   };
 
   const handleSubmit = () => {
+    setError({});
     // const token = btoa()`${userName}:${password}`.toString("base64");
     fetch("http://localhost:3000/api/login", {
       method: "POST",
@@ -46,10 +49,11 @@ export default function LoginDialog(props) {
         return res.json();
       })
       .then((res) => props.handleLogin(res.username, res.token))
-      .catch((error) => console.warn(error));
+      .catch((err) => {
+        if (err.status === "401") setError(err.message);
+      });
     props.handleLoginDialogState(false);
   };
-
   return (
     <div>
       <Dialog open={props.isOpen} onClose={handleClose}>
