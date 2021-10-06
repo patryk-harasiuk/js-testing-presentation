@@ -1,4 +1,6 @@
 {
   "screenshotsFolder": "./tests/e2e/screenshots",
-  "integrationFolder": "./tests/e2e/"
+  "integrationFolder": "./tests/e2e/",
+  "supportFile": "./tests/e2e/support",
+  "pluginsFile": "./tests/e2e/plugins"
 }
