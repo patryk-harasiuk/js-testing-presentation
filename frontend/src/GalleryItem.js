@@ -31,9 +31,10 @@ export default function GalleryItem(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-cy="gallery-item">
       <img alt="meaningless text" className={classes.media} src={url} />
       <IconButton
+        data-cy="delete"
         onClick={handleDelete}
         disableRipple
         className={classes.button}

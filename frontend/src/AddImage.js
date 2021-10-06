@@ -38,7 +38,12 @@ export default function AddImage(props) {
 
   return (
     <React.Fragment>
-      <Fab color="primary" onClick={handleOpen} className={classes.root}>
+      <Fab
+        color="primary"
+        onClick={handleOpen}
+        className={classes.root}
+        data-cy="fab-add"
+      >
         <AddIcon />
       </Fab>
       <Dialog open={isOpen} onClose={handleClose} fullWidth>
@@ -59,7 +64,12 @@ export default function AddImage(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary" disabled={!url}>
+          <Button
+            onClick={handleSubmit}
+            color="primary"
+            disabled={!url}
+            data-cy="add"
+          >
             Add
           </Button>
         </DialogActions>

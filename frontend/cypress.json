@@ -1,0 +1,4 @@
+{
+  "screenshotsFolder": "./tests/e2e/screenshots",
+  "integrationFolder": "./tests/e2e/"
+}

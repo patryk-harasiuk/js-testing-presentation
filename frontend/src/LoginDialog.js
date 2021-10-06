@@ -85,6 +85,7 @@ export default function LoginDialog(props) {
             onClick={handleSubmit}
             color="primary"
             disabled={!userName || !password}
+            data-cy="login"
           >
             Login
           </Button>
