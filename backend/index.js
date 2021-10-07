@@ -3,6 +3,7 @@ const PORT = process.env.PORT || 3000;
 const express = require("express");
 const app = express();
 const path = require("path");
+const cors = require("cors");
 
 // const { Datastore } = require('nedb-async-await');
 const { AsyncNedb } = require("nedb-async");
@@ -20,12 +21,11 @@ db.users = new AsyncNedb({
 
 if (process.env.ENV === "dev") {
   console.log("cors is on");
-  const cors = require("cors");
-  app.use(cors());
 }
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // // base64 helpers
 // const btoa = (string) => Buffer.from(string).toString("base64");
