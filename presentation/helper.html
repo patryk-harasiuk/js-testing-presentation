@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>helper</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/night.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section><h1>Javascript testy</h1></section>
+        <section>
+          <h3>Rodzaje testów</h3>
+          <p class="comment">
+            There are a few different types of tests, and it is essential to
+            know how they differ from each other. Most applications will require
+            you to write multiple kinds of tests to get the best result
+            possible.
+          </p>
+        </section>
+        <section>
+          <h3>Testy jednostkowe</h3>
+          <p class="comment">
+            They are small and highly focused tests that can efficiently be
+            executed on your local machine because of their fast execution time.
+            You are going to have hundreds, if not thousands of these tests and
+            run them on a regular basis while developing. The only downside to
+            these kinds of tests is that they are not executed on real devices
+            and therefore have lower fidelity than the other types of tests.
+            possible.
+          </p>
+        </section>
+        <section>
+          <h3>Testy integracyjne</h3>
+          <p class="comment">
+            These tests are of medium size and have a much higher execution time
+            then Unit tests. They aren't executed as often but are still vital
+            for checking the health status of your applications. Their fidelity
+            is also a lot higher because they run on real devices and verify the
+            actual interaction between various components of your application.
+          </p>
+        </section>
+        <section>
+          <h3>Testy funkcjonalne / E2E</h3>
+          <p class="comment">
+            Imagine you have an application with a sign-up flow comprising of
+            several steps, and you want to test the entire flow, that’s where
+            End-to-End tests come into play. E2E tests will also run on real
+            devices just like integration tests and therefore, will again be
+            quite slow in their execution. The only downside to these kinds of
+            tests is that debugging them and finding out what went wrong if a
+            particular test fails becomes very hard because of their vast scope.
+          </p>
+        </section>
+        <section>
+          <h3>Koncepty</h3>
+
+          <p class="comment">
+            Before starting to write tests for your code, you first need to be
+            familiar with the most crucial testing concepts and when you need to
+            use them. These concepts will influence the architecture of your
+            application and how you write code in general
+          </p>
+        </section>
+        <section>
+          <h3>Matchers</h3>
+
+          <p class="comment">
+            Imagine you have a function that calculates the result of a certain
+            factorial number. Testing the function can then be done using the
+            expect() function and a simple matcher that checks if the result of
+            the function matches the expected value.
+          </p>
+        </section>
+        <section>
+          <h3>Mocking</h3>
+
+          <p class="comment">
+            Mocks help your tests to avoid test unreliability (flakiness) and
+            improve the speed of your tests. They are also useful if the real
+            objects are impractical to incorporate into tests. In short, mocking
+            is creating objects or services that simulate the behavior of real
+            objects (A database, for example).
+          </p>
+        </section>
+        <section>
+          <h3>Lifecycle</h3>
+
+          <p class="comment">
+            Here is an example of lifecycle methods in the Jest testing
+            framework.
+          </p>
+        </section>
+        <section>
+          <h3>87% deweloperów ma testy w swoich projektach</h3>
+          <p>https://www.jetbrains.com/lp/devecosystem-2020/testing/</p>
+        </section>
+        <section>
+          <h5>Jakie testy są używane w twoim projekcie?</h5>
+          <p>https://www.jetbrains.com/lp/devecosystem-2020/testing/</p>
+        </section>
+        <section>
+          <h5>Użycie narzędzi do testowania</h5>
+
+          <p>https://2020.stateofjs.com/en-US/technologies/testing/</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
